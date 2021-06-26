@@ -75,7 +75,7 @@
             <ul class="header-links pull-right">
                 @if(Auth::check())
                     <li><a style="color:white"
-                           href="{{route('user.history')}}">{{Auth::user()->full_name}} </a></li>
+                           href="{{route('user.index')}}">{{Auth::user()->full_name}} </a></li>
                     <li><a href="{{route('user.logout')}}"><i class="fa fa-user-o"></i> Logout</a></li>
                 @else
                     <li><a href="{{route('user.login')}}"><i class="fa fa-user-o"></i> Login</a></li>
@@ -123,7 +123,7 @@
                     <div class="header-ctn">
                         <!-- Cart -->
                         <div class="dropdown">
-                            <cart-count cart-route="{{route('user.cart')}}"/>
+                            <cart-count cart-route="{{route('store.cart')}}"/>
                         </div>
                         <!-- /Cart -->
 

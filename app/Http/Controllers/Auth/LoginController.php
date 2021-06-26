@@ -32,7 +32,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    //protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -61,7 +61,7 @@ class LoginController extends Controller
             return back()->with('error', 'Invalid Login details');
         }
 
-        return redirect()->route('user.home');
+        return redirect()->route('user.index');
     }
 
     public function logout(Request $request)

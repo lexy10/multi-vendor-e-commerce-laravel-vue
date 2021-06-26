@@ -50,7 +50,7 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         if(Auth::check()){
-            return redirect()->route("user.cart");
+            return redirect()->route("store.cart");
         }
 
         $res = Product::all();

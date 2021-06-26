@@ -1,6 +1,6 @@
 <?php
 
-$DATABASE_URL = parse_url('mysql://b0fe70da9c2d99:83aa5ca0@eu-cdbr-west-01.cleardb.com/heroku_c5de57753b2f5dd?reconnect=true');
+$DATABASE_URL = parse_url('mysql://b0fe70da9c2d99:83aa5ca0@eu-cdbr-west-01.cleardb.com:3306/heroku_c5de57753b2f5dd?reconnect=true');
 
 return [
 
