@@ -52405,7 +52405,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -52499,6 +52499,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -52509,7 +52516,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            paystackkey: "pk_test_4ed81639a6b594392a7ac16503321809d5e8048e" //paystack public key
+            paystackkey: "pk_test_4ed81639a6b594392a7ac16503321809d5e8048e", //paystack public key
+            orderPlaced: false
         };
     },
 
@@ -52556,6 +52564,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log("Payment closed");
         },
         addOrder: function addOrder(response) {
+            var _this = this;
+
             axios.post('/api/add-order', {
                 user_id: this.userdata.id,
                 cart: this.cart,
@@ -52565,6 +52575,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 price: this.getCartTotal
             }).then(function (resp) {
                 console.log(resp.data);
+                if (resp.data.status == 'success') {
+                    _this.orderPlaced = true;
+                }
             }).catch(function (err) {
                 console.log(err);
             });
@@ -52591,180 +52604,209 @@ var render = function() {
       "div",
       { staticClass: "order-summary", attrs: { id: "order_summary" } },
       [
-        _vm.cart.length > 0
-          ? _c("div", [
-              _c(
-                "table",
-                { staticClass: "table table-bordered" },
-                [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _vm._l(_vm.cart, function(item) {
-                    return _c(
-                      "tr",
-                      { key: item.id, staticClass: "rTableRow" },
+        !_vm.orderPlaced
+          ? _c("div", {}, [
+              _vm.cart.length > 0
+                ? _c("div", [
+                    _c(
+                      "table",
+                      { staticClass: "table table-bordered" },
                       [
-                        _c("td", { staticClass: "rTableCell" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "delete_item",
+                        _vm._m(0),
+                        _vm._v(" "),
+                        _vm._l(_vm.cart, function(item) {
+                          return _c(
+                            "tr",
+                            { key: item.id, staticClass: "rTableRow" },
+                            [
+                              _c("td", { staticClass: "rTableCell" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "delete_item",
+                                    attrs: {
+                                      type: "button",
+                                      id: "delete_item",
+                                      value: "",
+                                      name: "delete_item"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deleteProduct(item)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("X\n                            ")]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "rTableCell" }, [
+                                _c("img", {
+                                  attrs: {
+                                    src:
+                                      "/storage/product_images/" +
+                                      item.image_name,
+                                    height: "50px",
+                                    width: "50px"
+                                  }
+                                }),
+                                _vm._v(
+                                  " " +
+                                    _vm._s(item.name) +
+                                    "\n                        "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "rTableCell" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "sub",
+                                    attrs: {
+                                      type: "button",
+                                      id: "sub",
+                                      value: ""
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.decrementProduct(item)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("-")]
+                                ),
+                                _vm._v(" "),
+                                _c("input", {
+                                  staticStyle: { width: "15%" },
+                                  attrs: {
+                                    type: "number",
+                                    disabled: "",
+                                    id: "quantity",
+                                    name: ""
+                                  },
+                                  domProps: { value: item.qty }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "add",
+                                    attrs: {
+                                      type: "button",
+                                      id: "add",
+                                      value: ""
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.incrementProduct(item)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("+")]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "rTableCell" }, [
+                                _c("div", { attrs: { id: "" } }, [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(item.price * item.qty) +
+                                      " NGN\n                            "
+                                  )
+                                ])
+                              ])
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "order-col" }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c(
+                          "strong",
+                          {
+                            staticClass: "order-total",
+                            attrs: { id: "totalCost" }
+                          },
+                          [_vm._v(_vm._s(_vm.getCartTotal) + " NGN")]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm.user == 1
+                      ? _c("div", { staticClass: "payment-method" }, [
+                          _c("div", { staticClass: "input-radio" }, [
+                            _c("input", {
                               attrs: {
-                                type: "button",
-                                id: "delete_item",
-                                value: "",
-                                name: "delete_item"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.deleteProduct(item)
-                                }
+                                type: "radio",
+                                name: "payment",
+                                id: "payment-2",
+                                checked: ""
                               }
-                            },
-                            [_vm._v("X\n                        ")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "rTableCell" }, [
-                          _c("img", {
-                            attrs: {
-                              src: "/storage/product_images/" + item.image_name,
-                              height: "50px",
-                              width: "50px"
-                            }
-                          }),
-                          _vm._v(
-                            " " + _vm._s(item.name) + "\n                    "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "rTableCell" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "sub",
-                              attrs: { type: "button", id: "sub", value: "" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.decrementProduct(item)
-                                }
-                              }
-                            },
-                            [_vm._v("-")]
-                          ),
-                          _vm._v(" "),
-                          _c("input", {
-                            staticStyle: { width: "15%" },
-                            attrs: {
-                              type: "number",
-                              disabled: "",
-                              id: "quantity",
-                              name: ""
-                            },
-                            domProps: { value: item.qty }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "add",
-                              attrs: { type: "button", id: "add", value: "" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.incrementProduct(item)
-                                }
-                              }
-                            },
-                            [_vm._v("+")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "rTableCell" }, [
-                          _c("div", { attrs: { id: "" } }, [
-                            _vm._v(
-                              "\n                            " +
-                                _vm._s(item.price * item.qty) +
-                                " NGN\n                        "
+                            }),
+                            _vm._v(" "),
+                            _vm._m(3),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "caption" },
+                              [
+                                _c("p", [
+                                  _vm._v(
+                                    "The product Will be delivered within 24 hour of confirmation. We accept only Paystack at this moment."
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "paystack",
+                                  {
+                                    staticClass: "primary-btn order-submit",
+                                    attrs: {
+                                      amount: this.paystackAmount,
+                                      email: this.userdata.email,
+                                      paystackkey: _vm.paystackkey,
+                                      reference: _vm.reference,
+                                      callback: _vm.callback,
+                                      close: _vm.close,
+                                      embed: false
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-money-bill-alt"
+                                    }),
+                                    _vm._v(
+                                      "\n                                Make Payment\n                            "
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
                             )
                           ])
                         ])
-                      ]
-                    )
-                  })
-                ],
-                2
-              ),
-              _vm._v(" "),
-              _vm._m(1),
-              _vm._v(" "),
-              _c("div", { staticClass: "order-col" }, [
-                _vm._m(2),
-                _vm._v(" "),
-                _c("div", [
-                  _c(
-                    "strong",
-                    { staticClass: "order-total", attrs: { id: "totalCost" } },
-                    [_vm._v(_vm._s(_vm.getCartTotal) + " NGN")]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _vm.user == 1
-                ? _c("div", { staticClass: "payment-method" }, [
-                    _c("div", { staticClass: "input-radio" }, [
-                      _c("input", {
-                        attrs: {
-                          type: "radio",
-                          name: "payment",
-                          id: "payment-2",
-                          checked: ""
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm._m(3),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "caption" },
-                        [
-                          _c("p", [
-                            _vm._v(
-                              "The product Will be delivered within 24 hour of confirmation. We accept only Paystack at this moment."
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "paystack",
-                            {
-                              staticClass: "primary-btn order-submit",
-                              attrs: {
-                                amount: this.paystackAmount,
-                                email: this.userdata.email,
-                                paystackkey: _vm.paystackkey,
-                                reference: _vm.reference,
-                                callback: _vm.callback,
-                                close: _vm.close,
-                                embed: false
-                              }
-                            },
-                            [
-                              _c("i", { staticClass: "fas fa-money-bill-alt" }),
-                              _vm._v(
-                                "\n                            Make Payment\n                        "
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ])
+                      : _vm._e()
                   ])
-                : _vm._e()
+                : _c("div", { staticClass: "order-col" }, [
+                    _c("h3", [_vm._v("Your Cart is Empty")]),
+                    _vm._v(" "),
+                    _vm._m(4)
+                  ])
             ])
-          : _c("div", { staticClass: "order-col" }, [
-              _c("h3", [_vm._v("Your Cart is Empty")]),
+          : _c("div", { staticClass: "text-center" }, [
+              _c("h3", { staticClass: "title" }, [_vm._v("Order Successful")]),
               _vm._v(" "),
-              _vm._m(4)
+              _c("i", { staticClass: "fa fa-check-circle text-success" }),
+              _vm._v(" "),
+              _c("p", [_vm._v("Your Order has been placed successfully.")]),
+              _vm._v(" "),
+              _vm._m(5)
             ])
       ]
     )
@@ -52814,8 +52856,19 @@ var staticRenderFns = [
     return _c("label", { attrs: { for: "payment-2" } }, [
       _c("span"),
       _vm._v(
-        "\n                        Pay with Paystack\n                    "
+        "\n                            Pay with Paystack\n                        "
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "/" } }, [
+      _c("input", {
+        staticClass: "primary-btn order-submit",
+        attrs: { type: "button", value: "Order Now" }
+      })
     ])
   },
   function() {
