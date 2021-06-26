@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
-            $table->json('cart');
+            $table->text('cart');
             $table->text('order_status');
             $table->text('payment_status');
             $table->text('payment_reference');
