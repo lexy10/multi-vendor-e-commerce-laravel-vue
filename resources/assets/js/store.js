@@ -51,6 +51,10 @@ export default {
 
         deleteProductFromCart(context, product) {
             context.commit('removeFromCart', product)
+        },
+
+        clearCart(context) {
+            context.commit('clearCart')
         }
     },
 
@@ -74,5 +78,9 @@ export default {
         removeFromCart(state, data) {
             return state.cart.splice(data, 1)
         },
+
+        clearCart(state) {
+            return state.cart = []
+        }
     }
 }

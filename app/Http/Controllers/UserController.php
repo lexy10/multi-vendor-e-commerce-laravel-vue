@@ -15,21 +15,7 @@ class UserController extends Controller
 {
     public function index(Request $r)
     {
-        $orders = auth()->user()->orders;
-        if(!$res1)
-        {
-            return view('user.orderHistory')->with('all',[])
-                 ->with('products',[])
-                 ->with('sale',[]);
-        }
-
-          //dd($cart);
-         return view('store.history')
-         ->with('products', $res)
-         ->with("cat", $cat)
-         ->with('all',$cart)
-         ->with('prods',$product)
-         ->with('sale',$res1);
+        return "Orders";
     }
 
 }

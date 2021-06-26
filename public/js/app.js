@@ -51111,6 +51111,9 @@ var index = {
         },
         deleteProductFromCart: function deleteProductFromCart(context, product) {
             context.commit('removeFromCart', product);
+        },
+        clearCart: function clearCart(context) {
+            context.commit('clearCart');
         }
     },
 
@@ -51129,6 +51132,9 @@ var index = {
         },
         removeFromCart: function removeFromCart(state, data) {
             return state.cart.splice(data, 1);
+        },
+        clearCart: function clearCart(state) {
+            return state.cart = [];
         }
     }
 });
@@ -52405,7 +52411,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -52418,6 +52424,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_paystack__ = __webpack_require__(75);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_paystack___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_paystack__);
+//
+//
 //
 //
 //
@@ -52575,6 +52583,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 price: this.getCartTotal
             }).then(function (resp) {
                 console.log(resp.data);
+                _this.$store.dispatch('clearCart');
                 if (resp.data.status == 'success') {
                     _this.orderPlaced = true;
                 }
@@ -52800,9 +52809,12 @@ var render = function() {
                   ])
             ])
           : _c("div", { staticClass: "text-center" }, [
-              _c("h3", { staticClass: "title" }, [_vm._v("Order Successful")]),
+              _c("h5", { staticClass: "title" }, [_vm._v("Order Successful")]),
               _vm._v(" "),
-              _c("i", { staticClass: "fa fa-check-circle text-success" }),
+              _c("i", {
+                staticClass: "fa fa-check-circle text-success",
+                staticStyle: { "font-size": "50px" }
+              }),
               _vm._v(" "),
               _c("p", [_vm._v("Your Order has been placed successfully.")]),
               _vm._v(" "),
@@ -52875,11 +52887,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "/" } }, [
-      _c("input", {
-        staticClass: "primary-btn order-submit",
-        attrs: { type: "button", value: "Order Now" }
-      })
+    return _c("div", { attrs: { align: "center" } }, [
+      _c("a", { attrs: { href: "/history" } }, [
+        _c("input", {
+          staticClass: "primary-btn order-submit",
+          attrs: { type: "button", value: "View Orders" }
+        })
+      ])
     ])
   }
 ]

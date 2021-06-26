@@ -77,10 +77,12 @@
             </div>
             </div>
             <div v-else class="text-center">
-                <h3 class="title">Order Successful</h3>
-                <i class="fa fa-check-circle text-success"></i>
+                <h5 class="title">Order Successful</h5>
+                <i style="font-size: 50px" class="fa fa-check-circle text-success"></i>
                 <p>Your Order has been placed successfully.</p>
-                <a href="/"><input type="button"  class="primary-btn order-submit" value="Order Now"></a>
+                <div align="center">
+                <a href="/history"><input type="button"  class="primary-btn order-submit" value="View Orders"></a>
+                </div>
             </div>
         </div>
     </div>
@@ -155,6 +157,7 @@ export default {
             })
                 .then((resp) => {
                     console.log(resp.data)
+                    this.$store.dispatch('clearCart')
                     if (resp.data.status == 'success') {
                         this.orderPlaced = true
                     }
