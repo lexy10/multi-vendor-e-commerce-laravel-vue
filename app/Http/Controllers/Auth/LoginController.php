@@ -61,7 +61,7 @@ class LoginController extends Controller
             return back()->with('error', 'Invalid Login details');
         }
 
-        return redirect()->route('user.index');
+        return redirect()->route('store.home');
     }
 
     public function logout(Request $request)
